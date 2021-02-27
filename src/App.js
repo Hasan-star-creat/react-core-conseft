@@ -106,14 +106,21 @@ function App() {
           </div>
        )
     }
-     
+    
      //creat useSate mathod
       function Counter(){
-         const [count , setCount] = useState(11);
+         const [count , setCount] = useState(10);
+         const handleIncress = () => {
+            setCount(count + 1);
+        
+       };
         return (
-          <dic>
+          <div>
              <h1>Count:{count}</h1>
-          </dic>
+             <button onClick = {() => setCount(count - 1)}>Decress</button>
+             <button onClick={handleIncress}>Incree</button>
+          </div>
         )
       }
+       
 export default App;
