@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function App() {
    var products = [
@@ -23,6 +23,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <p>I Am A Reack person</p>
+         <Users></Users>
          <Counter></Counter>
          {
             friends.map(fd => <Friends friend = {fd} ></Friends>)
@@ -109,7 +110,7 @@ function App() {
     
      //creat useSate mathod
       function Counter(){
-         const [count , setCount] = useState(10);
+         const [count , setCount] = useState(0);
          const handleIncress = () => {
             setCount(count + 1);
         
@@ -122,5 +123,28 @@ function App() {
           </div>
         )
       }
+       
+      // create a users component 
+       function Users() {
+           const [users , setUsers] = useState([]);
+            useEffect(() =>{
+              fetch('https://jsonplaceholder.typicode.com/users')
+              .then(res => res.json())
+              .then(data => setUsers(data) )
+            }, [])
+          return (
+            <div>
+               <h3>Dynamic Users: {users.length}</h3>
+                 {console.log(users)}
+               <ol style={{listStyleType: '1'}}>
+                 {
+                    users.map(user => <li>{user.name} Email: {user.email}</li>)
+
+                 }
+               </ol>
+            
+            </div>
+          )
+       }
        
 export default App;
